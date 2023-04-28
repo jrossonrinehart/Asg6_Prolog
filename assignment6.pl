@@ -24,3 +24,6 @@ countElems(L, [H], [Hcnt]) :- countElem(L, H, Hcnt).
 countElems(L, [H|T], [Hcnt|TR]) :- countElem(L, H, Hcnt), countElems(L, T, TR).
 findMode(L, M) :- list_to_set(L, U), countElems(L, U, UC), findMaxU(U, UC, M).
 
+findmedian(Ls, med) :- sort(0, @=<, Ls, S), \+isEven(Ls), length(Ls, E), G is floor(E/2), nth0(G, S, med).
+findmedian(Ls, med) :- sort(0, @=<, Ls, S), isEven(Ls), length(Ls, E), G is E/2, Z is G-1, nth0(G, S, F), nth0(Z, S, T), findAvg([F, T], med).
+isEven(Ls) :- length(Ls, N), 0 is mod(N,2).
